@@ -9,6 +9,7 @@ import { parseHTML } from 'linkedom';
 import { v4 as uuidv4 } from 'uuid';
 import domainUtils from '../utils/domain-uitls';
 import settingService from "./setting-service";
+import dayjs from 'dayjs';
 
 const attService = {
 
@@ -132,7 +133,21 @@ const attService = {
 
 		for (let att of attList) {
 			att.buff = fileUtils.base64ToUint8Array(att.content);
-			att.key = constant.ATTACHMENT_PREFIX + await fileUtils.getBuffHash(att.buff) + fileUtils.getExtFileName(att.filename);
+			if (c.env.ATTACHMENT_RENAME === 'true') {
+				att.key = constant.ATTACHMENT_PREFIX + await fileUtils.getBuffHash(att.buff) + fileUtils.getExtFileName(att.filename);
+			} else {
+				const timestamp = dayjs().format('YYYYMMDDHHmmss');
+				const lastDotIndex = att.filename.lastIndexOf('.');
+				let name, ext;
+				if (lastDotIndex !== -1) {
+					name = att.filename.substring(0, lastDotIndex);
+					ext = att.filename.substring(lastDotIndex);
+				} else {
+					name = att.filename;
+					ext = '';
+				}
+				att.key = constant.ATTACHMENT_PREFIX + `${name}_${timestamp}${ext}`;
+			}
 			const attData = { userId, accountId, emailId };
 			attData.key = att.key;
 			attData.size = att.buff.length;
