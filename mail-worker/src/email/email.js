@@ -12,6 +12,7 @@ import verifyUtils from '../utils/verify-utils';
 import r2Service from '../service/r2-service';
 import userService from '../service/user-service';
 import telegramService from '../service/telegram-service';
+import dayjs from 'dayjs';
 
 export async function email(message, env, ctx) {
 
@@ -136,7 +137,23 @@ export async function email(message, env, ctx) {
 
 		for (let item of email.attachments) {
 			let attachment = { ...item };
-			attachment.key = constant.ATTACHMENT_PREFIX + await fileUtils.getBuffHash(attachment.content) + fileUtils.getExtFileName(item.filename);
+			if (env.ATTACHMENT_RENAME === 'true') {
+				attachment.key = constant.ATTACHMENT_PREFIX + await fileUtils.getBuffHash(attachment.content) + fileUtils.getExtFileName(item.filename);
+			} else {
+				const timestamp = dayjs().format('YYYYMMDDHHmmss');
+				const lastDotIndex = item.filename.lastIndexOf('.');
+				let name, ext;
+				if (lastDotIndex !== -1) {
+					name = item.filename.substring(0, lastDotIndex);
+					ext = item.filename.substring(lastDotIndex);
+				} else {
+					name = item.filename;
+					ext = '';
+				}
+				attachment.key = constant.ATTACHMENT_PREFIX + `${name}_${timestamp}${ext}`;
+			}
+
+
 			attachment.size = item.content.length ?? item.content.byteLength;
 			attachments.push(attachment);
 			if (attachment.contentId) {

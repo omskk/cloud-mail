@@ -133,9 +133,9 @@ const attService = {
 
 		for (let att of attList) {
 			att.buff = fileUtils.base64ToUint8Array(att.content);
-			// if (c.env.ATTACHMENT_RENAME === 'true') {
-			// 	att.key = constant.ATTACHMENT_PREFIX + await fileUtils.getBuffHash(att.buff) + fileUtils.getExtFileName(att.filename);
-			// } else {
+			if (c.env.ATTACHMENT_RENAME === 'true') {
+				att.key = constant.ATTACHMENT_PREFIX + await fileUtils.getBuffHash(att.buff) + fileUtils.getExtFileName(att.filename);
+			} else {
 				const timestamp = dayjs().format('YYYYMMDDHHmmss');
 				const lastDotIndex = att.filename.lastIndexOf('.');
 				let name, ext;
@@ -147,7 +147,7 @@ const attService = {
 					ext = '';
 				}
 				att.key = constant.ATTACHMENT_PREFIX + `${name}_${timestamp}${ext}`;
-			// }
+			}
 			const attData = { userId, accountId, emailId };
 			attData.key = att.key;
 			attData.size = att.buff.length;
