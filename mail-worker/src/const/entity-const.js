@@ -7,6 +7,13 @@ export const userConst = {
 	}
 }
 
+export const accountConst = {
+	allReceive: {
+		CLOSE: 0,
+		OPEN: 1
+	}
+}
+
 export const roleConst = {
 	isDefault: {
 		CLOSE: 0,
@@ -43,6 +50,10 @@ export const emailConst = {
 		SAVING: 6,
 		NOONE: 7,
 		FAILED: 8
+	},
+	unread: {
+		UNREAD: 0,
+		READ: 1
 	}
 }
 

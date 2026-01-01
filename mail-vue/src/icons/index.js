@@ -682,4 +682,28 @@ addCollection({
         }
     }
 })
+addCollection({
+    "prefix": "fluent",
+    "lastModified": 1761371481,
+    "aliases": {},
+    "width": 20,
+    "height": 20,
+    "icons": {
+        "mail-read-20-regular": {
+            "body": "<path fill=\"currentColor\" d=\"M9.743 2.071a.5.5 0 0 1 .514 0l6.772 4.063A2 2 0 0 1 18 7.85v6.65a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 2 14.5V7.85a2 2 0 0 1 .971-1.716zM10 3.083L3.486 6.992L3.472 7L10 10.917L16.528 7l-.013-.008zm7 4.8l-6.743 4.046a.5.5 0 0 1-.514 0L3 7.883V14.5A1.5 1.5 0 0 0 4.5 16h11a1.5 1.5 0 0 0 1.5-1.5z\"/>"
+        }
+    }
+})
+addCollection({
+    "prefix": "flat-color-icons",
+    "lastModified": 1754899066,
+    "aliases": {},
+    "width": 48,
+    "height": 48,
+    "icons": {
+        "folder": {
+            "body": "<path fill=\"rgb(51, 126, 204)\" d=\"M40 12H22l-4-4H8c-2.2 0-4 1.8-4 4v8h40v-4c0-2.2-1.8-4-4-4\"/><path fill=\"#23C5F0\" d=\"M40 12H8c-2.2 0-4 1.8-4 4v20c0 2.2 1.8 4 4 4h32c2.2 0 4-1.8 4-4V16c0-2.2-1.8-4-4-4\"/>"
+        }
+    }
+})
 
